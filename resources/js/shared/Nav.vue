@@ -1,20 +1,29 @@
 <template>
     <nav class="list-disc px-8">
-        <ul>
+        <ul class="flex space-x-4">
             <li>
-                <Link href="/">Home</Link>
+                <NavLink href="/">Home</NavLink>
             </li>
             <li>
-                <Link href="/users">Users</Link>
+                <NavLink href="/users">Users</NavLink>
             </li>
             <li>
-                <Link href="/config">Config</Link>
+                <NavLink href="/config">Config</NavLink>
+            </li>
+            <li>
+                <NavLink
+                    href="/logout"
+                    method="post"
+                    as="button"
+                    :data="{ foo: 'bar' }"
+                    >Logout</NavLink
+                >
             </li>
         </ul>
     </nav>
 </template>
 
 <script setup>
-  import { Link } from '@inertiajs/vue3';
-  defineProps();
+import NavLink from './NavLink.vue';
+defineProps();
 </script>

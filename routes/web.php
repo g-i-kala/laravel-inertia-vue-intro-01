@@ -13,7 +13,7 @@ Route::get('/', function () {
 
 Route::get('/users', function () {
     return Inertia::render('Users', [
-        'param' => 'param',
+        'time' => now()->toTimeString(),
     ]);
 })->name('users');
 
@@ -22,6 +22,11 @@ Route::get('/config', function () {
         'param' => 'param',
     ]);
 })->name('config');
+
+Route::post('/logout', function () {
+    dd(request('foo'));
+})->name('logout');
+
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
