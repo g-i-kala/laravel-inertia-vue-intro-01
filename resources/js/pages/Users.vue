@@ -1,4 +1,11 @@
 <template>
+
+    <Head>
+        <title>
+            Users
+        </title>
+        <meta name="description" content="User management page" head-key="description" />
+    </Head>
     <div class="p-8">
         <h1 class="text-3xl">Users</h1>
     </div>
@@ -9,11 +16,8 @@
 </template>
 
 <script setup>
-import Layout from '../shared/Layout.vue';
+    import { Head } from '@inertiajs/vue3';
 defineProps({
     time: String,
-});
-defineOptions({
-    layout: Layout,
 });
 </script>
