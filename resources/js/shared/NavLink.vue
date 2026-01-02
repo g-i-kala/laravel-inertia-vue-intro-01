@@ -1,9 +1,9 @@
 <template>
-    <Link
-    :class="isActive  ? 
-      'text-blue-700 font-bold text-lg hover:underline' :
-      'text-blue-500 text-lg hover:underline'" 
-      :href="href" v-bind="$attrs"><slot /></Link>
+  <Link :class="isActive ?
+    'text-blue-700 font-bold text-lg hover:underline' :
+    'text-blue-500 text-lg hover:underline'" :href="href" v-bind="$attrs">
+    <slot />
+  </Link>
 </template>
 
 <script setup>

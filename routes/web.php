@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Models\User;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return Inertia::render('Home', [
@@ -14,6 +15,10 @@ Route::get('/', function () {
 Route::get('/users', function () {
     return Inertia::render('Users', [
         'time' => now()->toTimeString(),
+        'users' => User::paginate(10)->through(fn ($user) => [
+            'id' => $user->id,
+            'name' => $user->name,
+        ]),
     ]);
 })->name('users');
 

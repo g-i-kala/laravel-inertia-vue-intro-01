@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { Head } from '@inertiajs/vue3';
+
 const { name } = defineProps({
     name: String,
 });

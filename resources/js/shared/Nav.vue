@@ -11,13 +11,7 @@
                 <NavLink href="/config">Config</NavLink>
             </li>
             <li>
-                <NavLink
-                    href="/logout"
-                    method="post"
-                    as="button"
-                    :data="{ foo: 'bar' }"
-                    >Logout</NavLink
-                >
+                <NavLink href="/logout" method="post" as="button" :data="{ foo: 'bar' }">Logout</NavLink>
             </li>
         </ul>
     </nav>
