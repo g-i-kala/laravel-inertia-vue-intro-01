@@ -28,7 +28,7 @@
                 </tbody>
             </table>
         </div>
-
+        shadcsn
         <div>
             <Pagination class="my-4" v-if="users.last_page > 1">
                 <PaginationPrevious :disabled="!users.prev_page_url"
@@ -47,6 +47,7 @@
                 </PaginationNext>
             </Pagination>
         </div>
+        simples2
         <div>
             <template v-for="link in users.links" :key="link.label">
                 <!-- Disabled link (no URL) -->
@@ -62,7 +63,19 @@
                 ]" v-html="link.label" />
             </template>
         </div>
-
+        Simple
+        <div>
+            <Component :is="link.url ? 'Link' : 'span'" v-for="link in users.links" :key="link.label" :href="link.url"
+                :class="[
+                    'px-4 py-2 rounded mr-2',
+                    link.active
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-gray-200'
+                ]" v-html="link.label" />
+        </div>
+        Jeff
+        <PaginationJeff :links="users.links"></PaginationJeff>
+        autocomplete
         <div class=" pt-4">
             <button class="px-4 py-2 bg-gray-200 rounded mr-2" :disabled="!users.prev_page_url"
                 @click="$inertia.get(users.prev_page_url, {}, { preserveState: true, preserveScroll: true })">
@@ -81,7 +94,7 @@
 </template>
 
 <script setup>
-
+import PaginationJeff from '../shared/PaginationJeff.vue';
 import NavLink from '../shared/NavLink.vue';
 import {
   Pagination,
