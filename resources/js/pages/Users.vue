@@ -7,8 +7,11 @@
         <meta name="description" content="User management page" head-key="description" />
     </Head>
     <div class="p-8">
-        <h1 class="text-3xl pb-8">Users</h1>
-
+        <div class="mb-4 flex justify-between items-center">
+            <h1 class="text-3xl ">Users</h1>
+            <input v-model="form.search" type="text" placeholder="Search users..."
+                class="mb-4 p-1 border border-gray-300 rounded" />
+        </div>
 
         <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
             <table class="w-full text-sm text-left rtl:text-right text-body">
@@ -94,18 +97,38 @@
 </template>
 
 <script setup>
-import PaginationJeff from '../shared/PaginationJeff.vue';
-import NavLink from '../shared/NavLink.vue';
+import PaginationJeff from '../shared/PaginationJeff.vue'
+import NavLink from '../shared/NavLink.vue'
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
-defineProps({
-    time: String,
-    users: Object,
-});
+
+import { useForm } from '@inertiajs/vue3'
+import { watch } from 'vue'
+import debounce from 'lodash/debounce'
+
+const props = defineProps({
+  time: String,
+  users: Object,
+  filters: Object,
+})
+
+const form = useForm({
+  search: props.filters?.search ?? '',
+})
+
+watch(
+  () => form.search,
+  debounce((value) => {
+    form.get('/users', {
+      preserveState: true,
+      preserveScroll: true,
+      replace: true,
+    })
+  }, 500)
+)
 </script>

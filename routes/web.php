@@ -4,6 +4,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 Route::get('/', function () {
     return Inertia::render('Home', [
@@ -13,12 +14,21 @@ Route::get('/', function () {
 
 
 Route::get('/users', function () {
+
     return Inertia::render('Users', [
         'time' => now()->toTimeString(),
-        'users' => User::paginate(10)->through(fn ($user) => [
+        'users' => User::query()
+        ->when(request('search'), function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%")
+            ;
+        })
+        ->paginate(10)
+        ->withQueryString()
+        ->through(fn ($user) => [
             'id' => $user->id,
             'name' => $user->name,
         ]),
+        'filters' => request()->only(['search']),
     ]);
 })->name('users');
 
